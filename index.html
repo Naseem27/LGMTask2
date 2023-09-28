@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registration Form</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        height: 100vh;
+        width: 100vw;
+      }
+      .content-wrapper {
+        width: 50%;
+      }
+      h1 {
+        text-align: center;
+      }
+
+      form {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px 10px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+        align-self: flex-start;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"],
+      input[type="file"] {
+        width: 90%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      input[type="submit"] {
+        background-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+
+      h2 {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      #displayData {
+        background-color: #f9f9f9;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-top: 10px;
+      }
+
+      #displayData h3 {
+        font-size: 18px;
+      }
+
+      #displayData p {
+        margin: 5px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="content-wrapper">
+      <h1>Registration Form</h1>
+      <form id="registrationForm" enctype="multipart/form-data">
+        <label for="image">Image:</label>
+        <input type="text" id="image" name="image" /><br />
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required /><br />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required /><br />
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required /><br />
+
+        <label for="skills">Skills:</label>
+        <input type="text" id="skills" name="skills" required /><br />
+
+        <label for="languages">Languages:</label>
+        <input type="text" id="languages" name="languages" required /><br />
+
+        <input type="submit" value="Submit" />
+      </form>
+    </div>
+    <div class="content-wrapper">
+      <h2>Registration Data:</h2>
+      <div id="displayData">
+        <p>hello</p>
+      </div>
+
+      <script>
+        document.addEventListener("DOMContentLoaded", function () {
+          const registrationForm = document.getElementById("registrationForm");
+          const displayData = document.getElementById("displayData");
+          const displayImage = document.getElementById("displayImage");
+
+          registrationForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(registrationForm);
+
+            const data = {};
+            formData.forEach((value, key) => {
+              data[key] = value;
+            });
+
+            // Display the entered data on the page
+            displayData.innerHTML = `
+            <div  style="display: flex;flex-direction: row;justify-content:space-between;align-items:center;">
+            <div>
+                <h3>Entered Information:</h3>
+                <p><strong>Name:</strong> ${data.name}</p>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Phone Number:</strong> ${data.phone}</p>
+                <p><strong>Skills:</strong> ${data.skills}</p>
+                <p><strong>Languages:</strong> ${data.languages}</p>
+                </div>
+                <div><img class='img-ht' src=${data.image} alt={loading...}  height=150 width=130/></div>
+                </div>
+                    
+                `;
+
+            // Display the selected image
+            // const selectedImage = document.getElementById("image").files[0];
+            // if (selectedImage) {
+            //   const reader = new FileReader();
+            //   reader.onload = function (e) {
+            //     displayImage.src = e.target.result;
+            //     displayImage.style.display = "block";
+            //   };
+            //   reader.readAsDataURL(selectedImage);
+            // }
+          });
+        });
+      </script>
+    </div>
+  </body>
+</html>
